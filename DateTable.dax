@@ -1,0 +1,10 @@
+// Create a new Date table in DAX (Modeling > New table)
+DateTbl =
+ADDCOLUMNS(
+    CALENDAR(DATE(2024, 1, 1), TODAY()),
+    "Year", YEAR([Date]),
+    "Month", FORMAT([Date], "MMM"),
+    "YearMonth", FORMAT([Date], "YYYY-MM")
+)
+
+// In Modeling: 'Mark as date table' and choose DateTbl[Date]

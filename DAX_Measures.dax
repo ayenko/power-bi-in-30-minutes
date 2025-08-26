@@ -1,0 +1,16 @@
+// Create a 'Measures' table (Modeling > New table): Measures = { ("Key", 1) }
+// Then add the following measures inside that table:
+
+Total Sales := SUM(Transactions[Sales])
+
+Total Units := SUM(Transactions[Units])
+
+AOV := DIVIDE([Total Sales], [Total Units])
+
+Sales MTD := TOTALMTD([Total Sales], 'DateTbl'[Date])
+
+Sales YoY % :=
+VAR Prev =
+    CALCULATE([Total Sales], DATEADD('DateTbl'[Date], -1, YEAR))
+RETURN
+    DIVIDE([Total Sales] - Prev, Prev)
